@@ -1,0 +1,34 @@
+Security Policy
+The aiOut project is built on the philosophy that true security cannot be "granted" by a service provider; it must be architected into the hardware and code you control.
+
+Zero-Telemetry & Local-Only
+aiOut operates on a Local-First security model.
+
+No "Phone Home": The agent does not send usage logs, crash reports, or telemetry to any central server. All diagnostics remain on your device.
+
+Encrypted Storage: All biometric keys and configuration data are stored in your device’s hardware-backed Secure Enclave (TPM/TEE). They never touch the network in a readable format.
+
+Verification-Based: We do not rely on "trusted" third-party certificates. We rely on cryptographic proofs verified on the Solana blockchain and stored on the Arweave permaweb.
+
+Reporting Vulnerabilities
+Because aiOut is open-source and decentralized, security is a community responsibility. If you identify a vulnerability or a logic flaw:
+
+Inspect: Please review the /kernel (eBPF/XDP logic) and /agent (signing logic) directories to verify the source of the issue.
+
+Open an Issue: Open a public issue in this repository. Transparency is our first line of defense against the "cluster buck" of proprietary software.
+
+Submit a Fix: Since this is a community-owned protocol, we encourage "pull requests" that harden the code. If your fix improves the security of the Consent Stack, it will be merged into the master branch.
+
+Hardening the Circuit
+We are specifically focused on mitigating the following threat vectors:
+
+Scraper/Bot Ingress: Managed at the kernel level via XDP.
+
+Identity Impersonation: Prevented via biometric WebAuthn ceremonies bound to device-specific SNS handles.
+
+Protocol Injection: Prevented via cryptographic signing of all manifest updates.
+
+What is NOT Covered
+aiOut provides the infrastructure for you to secure your device. We are not a "cloud security" service. We provide the tools for you to air-gap your intent from the intrusive corporate web. You are responsible for the physical security of your hardware and the management of your local cryptographic keys.
+
+If you don't trust the code, fork it and rewrite it. That is the aiOut way.
